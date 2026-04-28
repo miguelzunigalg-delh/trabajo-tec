@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Punta de Lobos - Guía Turística</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #f5f7fa;
+        color: #333;
+    }
+
+    header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        background: rgba(10, 61, 98, 0.9);
+        color: white;
+        padding: 15px;
+        z-index: 1000;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+    .hero {
+        height: 100vh;
+        background: url('https://upload.wikimedia.org/wikipedia/commons/5/5c/Punta_de_Lobos.jpg') center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+        background: rgba(0,0,0,0.5);
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    section {
+        padding: 80px 20px;
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #0a3d62;
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 12px 18px;
+        background: #27ae60;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background: #1e8449;
+    }
+
+    iframe {
+        width: 100%;
+        height: 300px;
+        border-radius: 10px;
+        border: none;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        background: #0a3d62;
+        color: white;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#info">Información</a>
+        <a href="#actividades">Actividades</a>
+        <a href="#mapa">Mapa</a>
+    </nav>
+</header>
+
+<section class="hero" id="inicio">
+    <h1>Descubre Punta de Lobos</h1>
+</section>
+
+<section id="info">
+    <h2>Sobre el lugar</h2>
+    <p>
+        Punta de Lobos es uno de los destinos más impresionantes de Pichilemu,
+        famoso por sus olas de clase mundial y sus paisajes naturales únicos.
+    </p>
+</section>
+
+<section id="actividades">
+    <h2>Qué puedes hacer</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Surf</h3>
+            <p>Olas ideales para surfistas experimentados.</p>
+        </div>
+        <div class="card">
+            <h3>Caminatas</h3>
+            <p>Recorre acantilados y senderos naturales.</p>
+        </div>
+        <div class="card">
+            <h3>Fotografía</h3>
+            <p>Paisajes perfectos para capturar momentos únicos.</p>
+        </div>
+    </div>
+</section>
+
+<section id="mapa">
+    <h2>Ubicación</h2>
+
+    <iframe 
+        src="https://www.google.com/maps?q=Punta+de+Lobos+Pichilemu&output=embed">
+    </iframe>
+
+    <button class="btn" onclick="abrirGPS()">Llegar con GPS</button>
+</section>
+
+<footer>
+    <p>© 2026 Turismo Punta de Lobos</p>
+</footer>
+
+<script>
+function abrirGPS() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            const lat = pos.coords.latitude;
+            const lon = pos.coords.longitude;
+
+            window.open(
+                `https://www.google.com/maps/dir/${lat},${lon}/Punta+de+Lobos+Pichilemu`,
+                '_blank'
+            );
+        }, function() {
+            // Si falla el GPS
+            window.open(
+                "https://www.google.com/maps/dir/?api=1&destination=Punta+de+Lobos+Pichilemu",
+                '_blank'
+            );
+        });
+    } else {
+        // Navegador no soporta GPS
+        window.open(
+            "https://www.google.com/maps/dir/?api=1&destination=Punta+de+Lobos+Pichilemu",
+            '_blank'
+        );
+    }
+}
+</script>
+
+</body>
+</html>
