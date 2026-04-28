@@ -3,122 +3,172 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Punta de Lobos - Guía Turística</title>
+<title>Punta de Lobos | Turismo</title>
+
+<!-- Fuente moderna -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        scroll-behavior: smooth;
-    }
+:root {
+    --primary: #0a2540;
+    --secondary: #00a8a8;
+    --accent: #00c853;
+    --light: #f4f7fb;
+    --text: #1a1a1a;
+}
 
-    body {
-        font-family: 'Segoe UI', sans-serif;
-        background: #f5f7fa;
-        color: #333;
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    header {
-        position: fixed;
-        width: 100%;
-        top: 0;
-        background: rgba(10, 61, 98, 0.9);
-        color: white;
-        padding: 15px;
-        z-index: 1000;
-    }
+html {
+    scroll-behavior: smooth;
+}
 
-    nav {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-    }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--light);
+    color: var(--text);
+}
 
-    nav a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-    }
+/* NAVBAR */
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    backdrop-filter: blur(10px);
+    background: rgba(10, 37, 64, 0.7);
+    z-index: 1000;
+}
 
-    nav a:hover {
-        text-decoration: underline;
-    }
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px;
+}
 
-    .hero {
-        height: 100vh;
-        background: url('https://upload.wikimedia.org/wikipedia/commons/5/5c/Punta_de_Lobos.jpg') center/cover no-repeat;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        text-align: center;
-    }
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+}
 
-    .hero h1 {
-        font-size: 3rem;
-        background: rgba(0,0,0,0.5);
-        padding: 20px;
-        border-radius: 10px;
-    }
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: var(--accent);
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
 
-    section {
-        padding: 80px 20px;
-        max-width: 1100px;
-        margin: auto;
-    }
+nav a:hover::after {
+    width: 100%;
+}
 
-    h2 {
-        margin-bottom: 20px;
-        color: #0a3d62;
-    }
+/* HERO */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
+    url('https://upload.wikimedia.org/wikipedia/commons/5/5c/Punta_de_Lobos.jpg') center/cover no-repeat;
 
-    .cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
 
-    .card {
-        background: white;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        transition: transform 0.3s;
-    }
+.hero-content h1 {
+    font-size: 3.5rem;
+}
 
-    .card:hover {
-        transform: translateY(-5px);
-    }
+.hero-content p {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
 
-    .btn {
-        display: inline-block;
-        margin-top: 15px;
-        padding: 12px 18px;
-        background: #27ae60;
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        cursor: pointer;
-    }
+/* SECCIONES */
+section {
+    padding: 100px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
 
-    .btn:hover {
-        background: #1e8449;
-    }
+h2 {
+    margin-bottom: 20px;
+    color: var(--primary);
+}
 
-    iframe {
-        width: 100%;
-        height: 300px;
-        border-radius: 10px;
-        border: none;
-    }
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
 
-    footer {
-        text-align: center;
-        padding: 20px;
-        background: #0a3d62;
-        color: white;
-    }
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* BOTONES */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 24px;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #00c853, #00e676);
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+}
+
+/* MAPA */
+iframe {
+    width: 100%;
+    height: 350px;
+    border-radius: 15px;
+    margin-top: 20px;
+    border: none;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: var(--primary);
+    color: white;
+    margin-top: 50px;
+}
+
+/* ANIMACIÓN */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 </style>
 </head>
 
@@ -127,50 +177,56 @@
 <header>
     <nav>
         <a href="#inicio">Inicio</a>
-        <a href="#info">Información</a>
-        <a href="#actividades">Actividades</a>
-        <a href="#mapa">Mapa</a>
+        <a href="#info">Lugar</a>
+        <a href="#actividades">Experiencias</a>
+        <a href="#mapa">Ubicación</a>
     </nav>
 </header>
 
 <section class="hero" id="inicio">
-    <h1>Descubre Punta de Lobos</h1>
+    <div class="hero-content">
+        <h1>Punta de Lobos</h1>
+        <p>Un destino único en la costa de Pichilemu</p>
+        <button class="btn" onclick="abrirGPS()">Cómo llegar</button>
+    </div>
 </section>
 
-<section id="info">
-    <h2>Sobre el lugar</h2>
+<section id="info" class="fade-in">
+    <h2>Sobre el destino</h2>
     <p>
-        Punta de Lobos es uno de los destinos más impresionantes de Pichilemu,
-        famoso por sus olas de clase mundial y sus paisajes naturales únicos.
+        Punta de Lobos es uno de los puntos más emblemáticos de Chile,
+        reconocido internacionalmente por su surf y sus paisajes naturales.
+        Un lugar perfecto para desconectarse y conectar con el océano.
     </p>
 </section>
 
-<section id="actividades">
-    <h2>Qué puedes hacer</h2>
+<section id="actividades" class="fade-in">
+    <h2>Experiencias</h2>
+
     <div class="cards">
         <div class="card">
             <h3>Surf</h3>
-            <p>Olas ideales para surfistas experimentados.</p>
+            <p>Olas de nivel mundial ideales para surfistas experimentados.</p>
         </div>
+
         <div class="card">
             <h3>Caminatas</h3>
-            <p>Recorre acantilados y senderos naturales.</p>
+            <p>Senderos con vistas panorámicas al océano.</p>
         </div>
+
         <div class="card">
             <h3>Fotografía</h3>
-            <p>Paisajes perfectos para capturar momentos únicos.</p>
+            <p>Atardeceres y paisajes únicos para capturar.</p>
         </div>
     </div>
 </section>
 
-<section id="mapa">
+<section id="mapa" class="fade-in">
     <h2>Ubicación</h2>
 
-    <iframe 
-        src="https://www.google.com/maps?q=Punta+de+Lobos+Pichilemu&output=embed">
-    </iframe>
+    <iframe src="https://www.google.com/maps?q=Punta+de+Lobos+Pichilemu&output=embed"></iframe>
 
-    <button class="btn" onclick="abrirGPS()">Llegar con GPS</button>
+    <button class="btn" onclick="abrirGPS()">Abrir ruta con GPS</button>
 </section>
 
 <footer>
@@ -178,6 +234,7 @@
 </footer>
 
 <script>
+// GPS inteligente
 function abrirGPS() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(pos) {
@@ -189,20 +246,30 @@ function abrirGPS() {
                 '_blank'
             );
         }, function() {
-            // Si falla el GPS
             window.open(
                 "https://www.google.com/maps/dir/?api=1&destination=Punta+de+Lobos+Pichilemu",
                 '_blank'
             );
         });
     } else {
-        // Navegador no soporta GPS
         window.open(
             "https://www.google.com/maps/dir/?api=1&destination=Punta+de+Lobos+Pichilemu",
             '_blank'
         );
     }
 }
+
+// Animación al hacer scroll
+const elements = document.querySelectorAll('.fade-in');
+
+window.addEventListener('scroll', () => {
+    elements.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) {
+            el.classList.add('visible');
+        }
+    });
+});
 </script>
 
 </body>
