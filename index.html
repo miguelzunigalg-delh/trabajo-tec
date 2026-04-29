@@ -3,238 +3,203 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Punta de Lobos | Turismo</title>
+<title>Punta de Lobos | Guía</title>
 
-<!-- Fuente moderna -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --primary: #0a2540;
-    --secondary: #00a8a8;
-    --accent: #00c853;
-    --light: #f4f7fb;
-    --text: #1a1a1a;
+    --azul-mar: #0077b6;
+    --turquesa: #00b4d8;
+    --verde: #00c853;
+    --arena: #f1faee;
+    --texto: #1d3557;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: var(--light);
-    color: var(--text);
-}
-
-/* NAVBAR */
-header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    backdrop-filter: blur(10px);
-    background: rgba(10, 37, 64, 0.7);
-    z-index: 1000;
-}
-
-nav {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 15px;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    position: relative;
-}
-
-nav a::after {
-    content: "";
-    position: absolute;
-    width: 0%;
-    height: 2px;
-    background: var(--accent);
-    left: 0;
-    bottom: -5px;
-    transition: 0.3s;
-}
-
-nav a:hover::after {
-    width: 100%;
+    background: var(--arena);
+    color: var(--texto);
 }
 
 /* HERO */
 .hero {
-    height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
+    height: 90vh;
+    background: linear-gradient(rgba(0,119,182,0.5), rgba(0,180,216,0.7)),
     url('https://upload.wikimedia.org/wikipedia/commons/5/5c/Punta_de_Lobos.jpg') center/cover no-repeat;
 
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    align-items: flex-end;
+    padding: 20px;
     color: white;
 }
 
-.hero-content h1 {
-    font-size: 3.5rem;
-}
+.hero h1 { font-size: 2.5rem; }
 
-.hero-content p {
-    margin-top: 10px;
-    font-size: 1.2rem;
-    opacity: 0.9;
-}
+/* CONTENIDO */
+.container { padding: 20px; }
 
-/* SECCIONES */
-section {
-    padding: 100px 20px;
-    max-width: 1100px;
-    margin: auto;
-}
-
-h2 {
-    margin-bottom: 20px;
-    color: var(--primary);
-}
+h2 { margin: 20px 0 10px; }
 
 /* CARDS */
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-}
-
 .card {
     background: white;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-    transition: 0.3s;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
 }
 
-.card:hover {
-    transform: translateY(-8px);
-}
+.card strong { display: block; margin-bottom: 5px; }
 
 /* BOTONES */
 .btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 14px 24px;
-    border-radius: 50px;
-    background: linear-gradient(45deg, #00c853, #00e676);
+    display: block;
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    border-radius: 10px;
+    background: linear-gradient(45deg, var(--verde), #69f0ae);
     color: white;
-    font-weight: 600;
+    font-weight: bold;
+    margin-top: 10px;
     text-decoration: none;
-    cursor: pointer;
     border: none;
 }
 
 /* MAPA */
 iframe {
     width: 100%;
-    height: 350px;
-    border-radius: 15px;
-    margin-top: 20px;
+    height: 250px;
+    border-radius: 12px;
     border: none;
+    margin-top: 10px;
 }
 
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 30px;
-    background: var(--primary);
-    color: white;
-    margin-top: 50px;
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    box-shadow: 0 -5px 10px rgba(0,0,0,0.1);
 }
 
-/* ANIMACIÓN */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: 0.8s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
+.navbar a {
+    text-decoration: none;
+    color: var(--azul-mar);
+    font-size: 0.8rem;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#info">Lugar</a>
-        <a href="#actividades">Experiencias</a>
-        <a href="#mapa">Ubicación</a>
-    </nav>
-</header>
-
-<section class="hero" id="inicio">
-    <div class="hero-content">
+<div class="hero">
+    <div>
         <h1>Punta de Lobos</h1>
-        <p>Un destino único en la costa de Pichilemu</p>
-        <button class="btn" onclick="abrirGPS()">Cómo llegar</button>
+        <p>Guía turística 🌊</p>
     </div>
+</div>
+
+<div class="container">
+
+<section>
+<h2>🌎 Sobre el lugar</h2>
+<div class="card">
+Punta de Lobos es uno de los mejores spots de surf de Chile, ubicado en Pichilemu. Destaca por sus olas, acantilados y paisajes naturales únicos.
+</div>
 </section>
 
-<section id="info" class="fade-in">
-    <h2>Sobre el destino</h2>
-    <p>
-        Punta de Lobos es uno de los puntos más emblemáticos de Chile,
-        reconocido internacionalmente por su surf y sus paisajes naturales.
-        Un lugar perfecto para desconectarse y conectar con el océano.
-    </p>
+<section>
+<h2>🏄 Actividades</h2>
+
+<div class="card">
+<strong>Surf</strong>
+Olas de nivel mundial para surfistas avanzados.
+</div>
+
+<div class="card">
+<strong>Caminatas</strong>
+Senderos con vista directa al océano.
+</div>
+
+<div class="card">
+<strong>Atardeceres</strong>
+Uno de los mejores lugares para ver el sunset en Chile.
+</div>
 </section>
 
-<section id="actividades" class="fade-in">
-    <h2>Experiencias</h2>
+<!-- HOTELES -->
+<section>
+<h2>🏨 Hoteles cercanos</h2>
 
-    <div class="cards">
-        <div class="card">
-            <h3>Surf</h3>
-            <p>Olas de nivel mundial ideales para surfistas experimentados.</p>
-        </div>
+<div class="card">
+<strong>Hotel Alaia</strong>
+Hotel moderno frente al mar, ideal para surfistas.
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=Hotel+Alaia+Pichilemu" target="_blank">Ver en Maps</a>
+</div>
 
-        <div class="card">
-            <h3>Caminatas</h3>
-            <p>Senderos con vistas panorámicas al océano.</p>
-        </div>
+<div class="card">
+<strong>Surf Lodge Punta de Lobos</strong>
+Ambiente relajado, perfecto para viajeros jóvenes.
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=Surf+Lodge+Punta+de+Lobos" target="_blank">Ver en Maps</a>
+</div>
 
-        <div class="card">
-            <h3>Fotografía</h3>
-            <p>Atardeceres y paisajes únicos para capturar.</p>
-        </div>
-    </div>
+<div class="card">
+<strong>Cabañas Punta de Lobos</strong>
+Opción más económica y acogedora.
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=Cabañas+Punta+de+Lobos+Pichilemu" target="_blank">Ver en Maps</a>
+</div>
+
 </section>
 
-<section id="mapa" class="fade-in">
-    <h2>Ubicación</h2>
+<!-- RESTAURANTES -->
+<section>
+<h2>🍽️ Restaurantes cercanos</h2>
 
-    <iframe src="https://www.google.com/maps?q=Punta+de+Lobos+Pichilemu&output=embed"></iframe>
+<div class="card">
+<strong>La Loba Restaurante</strong>
+Comida gourmet con productos locales.
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=La+Loba+Pichilemu" target="_blank">Ver en Maps</a>
+</div>
 
-    <button class="btn" onclick="abrirGPS()">Abrir ruta con GPS</button>
+<div class="card">
+<strong>Cardumen Café</strong>
+Perfecto para desayunos y café frente al mar.
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=Cardumen+Café+Pichilemu" target="_blank">Ver en Maps</a>
+</div>
+
+<div class="card">
+<strong>El Hoyo del Queque</strong>
+Comida rápida y local muy popular.
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=El+Hoyo+del+Queque+Pichilemu" target="_blank">Ver en Maps</a>
+</div>
+
 </section>
 
-<footer>
-    <p>© 2026 Turismo Punta de Lobos</p>
-</footer>
+<!-- MAPA -->
+<section>
+<h2>📍 Ubicación</h2>
+
+<iframe src="https://www.google.com/maps?q=Punta+de+Lobos+Pichilemu&output=embed"></iframe>
+
+<button class="btn" onclick="abrirGPS()">Llegar con GPS</button>
+</section>
+
+</div>
+
+<div class="navbar">
+<a href="#">Inicio</a>
+<a href="#mapa">Mapa</a>
+</div>
 
 <script>
-// GPS inteligente
 function abrirGPS() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(pos) {
@@ -258,18 +223,6 @@ function abrirGPS() {
         );
     }
 }
-
-// Animación al hacer scroll
-const elements = document.querySelectorAll('.fade-in');
-
-window.addEventListener('scroll', () => {
-    elements.forEach(el => {
-        const top = el.getBoundingClientRect().top;
-        if (top < window.innerHeight - 100) {
-            el.classList.add('visible');
-        }
-    });
-});
 </script>
 
 </body>
