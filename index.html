@@ -27,8 +27,9 @@ body {
 /* HERO */
 .hero {
     height: 90vh;
-    background: linear-gradient(rgba(0,119,182,0.5), rgba(0,180,216,0.7)),
-    url('punta-lobos.jpg') center/cover no-repeat;
+    background:
+        linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)),
+        url('punta-lobos.jpg') center/cover no-repeat;
 
     display: flex;
     align-items: flex-end;
@@ -52,7 +53,16 @@ h2 { margin: 20px 0 10px; }
     box-shadow: 0 10px 20px rgba(0,0,0,0.08);
 }
 
-.card strong { display: block; margin-bottom: 5px; }
+/* RATING */
+.rating {
+    color: #ffc107;
+    margin: 5px 0;
+}
+
+.rating span {
+    color: #555;
+    font-size: 0.9rem;
+}
 
 /* BOTONES */
 .btn {
@@ -112,7 +122,7 @@ iframe {
 <section>
 <h2>🌎 Sobre el lugar</h2>
 <div class="card">
-Punta de Lobos es uno de los mejores destinos de surf de Chile, ubicado en Pichilemu. Destaca por sus olas, acantilados y paisajes naturales únicos.
+Punta de Lobos es uno de los destinos más impresionantes de Chile, famoso por sus olas, acantilados y naturaleza única. Ideal para surf, caminatas y desconexión total.
 </div>
 </section>
 
@@ -121,18 +131,19 @@ Punta de Lobos es uno de los mejores destinos de surf de Chile, ubicado en Pichi
 
 <div class="card">
 <strong>Surf</strong>
-Olas de nivel mundial para surfistas avanzados.
+<p>Olas de nivel mundial para surfistas avanzados.</p>
 </div>
 
 <div class="card">
 <strong>Caminatas</strong>
-Senderos con vista al océano.
+<p>Senderos con vistas al océano.</p>
 </div>
 
 <div class="card">
 <strong>Atardeceres</strong>
-Perfecto para ver el sunset.
+<p>Uno de los mejores sunsets de Chile.</p>
 </div>
+
 </section>
 
 <section>
@@ -140,11 +151,13 @@ Perfecto para ver el sunset.
 
 <div class="card">
 <strong>Hotel Alaia</strong>
+<div class="rating">★★★★★ <span>(4.7)</span></div>
 <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Hotel+Alaia+Pichilemu" target="_blank">Ver en Maps</a>
 </div>
 
 <div class="card">
 <strong>Surf Lodge</strong>
+<div class="rating">★★★★☆ <span>(4.5)</span></div>
 <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Surf+Lodge+Punta+de+Lobos" target="_blank">Ver en Maps</a>
 </div>
 
@@ -155,11 +168,13 @@ Perfecto para ver el sunset.
 
 <div class="card">
 <strong>La Loba</strong>
+<div class="rating">★★★★☆ <span>(4.6)</span></div>
 <a class="btn" href="https://www.google.com/maps/search/?api=1&query=La+Loba+Pichilemu" target="_blank">Ver en Maps</a>
 </div>
 
 <div class="card">
 <strong>Cardumen Café</strong>
+<div class="rating">★★★★☆ <span>(4.4)</span></div>
 <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Cardumen+Café+Pichilemu" target="_blank">Ver en Maps</a>
 </div>
 
@@ -168,7 +183,7 @@ Perfecto para ver el sunset.
 <section>
 <h2>📍 Ubicación</h2>
 
-<iframe src="https://www.google.com/maps?q=Punta+de+Lobos+Pichilemu&output=embed"></iframe>
+<iframe src="https://www.google.com/maps?q=-34.4127,-72.0236&z=15&output=embed"></iframe>
 
 <button class="btn" onclick="abrirGPS()">Llegar con GPS</button>
 </section>
@@ -182,24 +197,25 @@ Perfecto para ver el sunset.
 
 <script>
 function abrirGPS() {
+    const destino = "-34.4127,-72.0236";
+
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(pos) {
-            const lat = pos.coords.latitude;
-            const lon = pos.coords.longitude;
+            const origen = pos.coords.latitude + "," + pos.coords.longitude;
 
             window.open(
-                `https://www.google.com/maps/dir/${lat},${lon}/Punta+de+Lobos+Pichilemu`,
+                `https://www.google.com/maps/dir/?api=1&origin=${origen}&destination=${destino}&travelmode=driving`,
                 '_blank'
             );
         }, function() {
             window.open(
-                "https://www.google.com/maps/dir/?api=1&destination=Punta+de+Lobos+Pichilemu",
+                `https://www.google.com/maps/dir/?api=1&destination=${destino}`,
                 '_blank'
             );
         });
     } else {
         window.open(
-            "https://www.google.com/maps/dir/?api=1&destination=Punta+de+Lobos+Pichilemu",
+            `https://www.google.com/maps/dir/?api=1&destination=${destino}`,
             '_blank'
         );
     }
