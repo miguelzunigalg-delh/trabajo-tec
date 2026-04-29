@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Punta de Lobos | Guía</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --azul-mar: #0077b6;
+    --turquesa: #00b4d8;
+    --verde: #00c853;
+    --arena: #f1faee;
+    --texto: #1d3557;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--arena);
+    color: var(--texto);
+}
+
+/* HERO */
+.hero {
+    height: 90vh;
+    background:
+        linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)),
+        url('punta-lobos.jpg') center/cover no-repeat;
+
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    color: white;
+}
+
+.hero h1 { font-size: 2.5rem; }
+
+/* CONTENIDO */
+.container { padding: 20px; }
+
+h2 { margin: 20px 0 10px; }
+
+/* CARDS */
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* RATING */
+.rating {
+    color: #ffc107;
+    margin: 5px 0;
+}
+
+.rating span {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* BOTONES */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    border-radius: 10px;
+    background: linear-gradient(45deg, var(--verde), #69f0ae);
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    text-decoration: none;
+    border: none;
+}
+
+/* MAPA */
+iframe {
+    width: 100%;
+    height: 250px;
+    border-radius: 12px;
+    border: none;
+    margin-top: 10px;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    box-shadow: 0 -5px 10px rgba(0,0,0,0.1);
+}
+
+.navbar a {
+    text-decoration: none;
+    color: var(--azul-mar);
+    font-size: 0.8rem;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+    <div>
+        <h1>Punta de Lobos</h1>
+        <p>Guía turística 🌊</p>
+    </div>
+</div>
+
+<div class="container">
+
+<section>
+<h2>🌎 Sobre el lugar</h2>
+<div class="card">
+Punta de Lobos es uno de los destinos más impresionantes de Chile, famoso por sus olas, acantilados y naturaleza única. Ideal para surf, caminatas y desconexión total.
+</div>
+</section>
+
+<section>
+<h2>🏄 Actividades</h2>
+
+<div class="card">
+<strong>Surf</strong>
+<p>Olas de nivel mundial para surfistas avanzados.</p>
+</div>
+
+<div class="card">
+<strong>Caminatas</strong>
+<p>Senderos con vistas al océano.</p>
+</div>
+
+<div class="card">
+<strong>Atardeceres</strong>
+<p>Uno de los mejores sunsets de Chile.</p>
+</div>
+
+</section>
+
+<section>
+<h2>🏨 Hoteles</h2>
+
+<div class="card">
+<strong>Hotel Alaia</strong>
+<div class="rating">★★★★★ <span>(4.7)</span></div>
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=Hotel+Alaia+Pichilemu" target="_blank">Ver en Maps</a>
+</div>
+
+<div class="card">
+<strong>Surf Lodge</strong>
+<div class="rating">★★★★☆ <span>(4.5)</span></div>
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=Surf+Lodge+Punta+de+Lobos" target="_blank">Ver en Maps</a>
+</div>
+
+</section>
+
+<section>
+<h2>🍽️ Restaurantes</h2>
+
+<div class="card">
+<strong>La Loba</strong>
+<div class="rating">★★★★☆ <span>(4.6)</span></div>
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=La+Loba+Pichilemu" target="_blank">Ver en Maps</a>
+</div>
+
+<div class="card">
+<strong>Cardumen Café</strong>
+<div class="rating">★★★★☆ <span>(4.4)</span></div>
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=Cardumen+Café+Pichilemu" target="_blank">Ver en Maps</a>
+</div>
+
+</section>
+
+<section>
+<h2>📍 Ubicación</h2>
+
+<iframe src="https://www.google.com/maps?q=-34.4127,-72.0236&z=15&output=embed"></iframe>
+
+<button class="btn" onclick="abrirGPS()">Llegar con GPS</button>
+</section>
+
+</div>
+
+<div class="navbar">
+<a href="#">Inicio</a>
+<a href="#mapa">Mapa</a>
+</div>
+
+<script>
+function abrirGPS() {
+    const destino = "-34.4127,-72.0236";
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            const origen = pos.coords.latitude + "," + pos.coords.longitude;
+
+            window.open(
+                `https://www.google.com/maps/dir/?api=1&origin=${origen}&destination=${destino}&travelmode=driving`,
+                '_blank'
+            );
+        }, function() {
+            window.open(
+                `https://www.google.com/maps/dir/?api=1&destination=${destino}`,
+                '_blank'
+            );
+        });
+    } else {
+        window.open(
+            `https://www.google.com/maps/dir/?api=1&destination=${destino}`,
+            '_blank'
+        );
+    }
+}
+</script>
+
+</body>
+</html>
