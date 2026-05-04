@@ -3,204 +3,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Punta de Lobos | Guía</title>
+<title>Mapa Punta de Lobos PRO</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
 
 <style>
-:root {
-    --azul-mar: #0077b6;
-    --turquesa: #00b4d8;
-    --verde: #00c853;
-    --arena: #f1faee;
-    --texto: #1d3557;
-}
+body { margin:0; font-family:'Poppins', sans-serif; }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+#map { height:100vh; }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background: var(--arena);
-    color: var(--texto);
-}
-
-.hero {
-    height: 90vh;
-    background:
-        linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)),
-        url('punta-lobos.jpg') center/cover no-repeat;
-
-    display: flex;
-    align-items: flex-end;
-    padding: 20px;
-    color: white;
-}
-
-.hero h1 { font-size: 2.5rem; }
-
-.container { padding: 20px; }
-
-h2 { margin: 20px 0 10px; }
-
-.card {
-    background: white;
-    padding: 15px;
-    border-radius: 15px;
-    margin-bottom: 15px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-}
-
-.rating {
-    color: #ffc107;
-    margin: 5px 0;
-}
-
-.rating span {
-    color: #555;
-    font-size: 0.9rem;
+/* PANEL */
+.panel {
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:white;
+    padding:10px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    z-index:1000;
 }
 
 .btn {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    text-align: center;
-    border-radius: 10px;
-    background: linear-gradient(45deg, var(--verde), #69f0ae);
-    color: white;
-    font-weight: bold;
-    margin-top: 10px;
-    text-decoration: none;
-    border: none;
+    display:block;
+    margin:5px 0;
+    padding:6px;
+    border:none;
+    border-radius:8px;
+    background:#00c853;
+    color:white;
+    font-size:0.8rem;
+    cursor:pointer;
 }
 
-iframe {
-    width: 100%;
-    height: 250px;
-    border-radius: 12px;
-    border: none;
-    margin-top: 10px;
-}
-
-.navbar {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: white;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    box-shadow: 0 -5px 10px rgba(0,0,0,0.1);
-}
-
-.navbar a {
-    text-decoration: none;
-    color: var(--azul-mar);
-    font-size: 0.8rem;
+.rating {
+    color: gold;
 }
 </style>
 </head>
 
 <body>
 
-<div class="hero">
-    <div>
-        <h1>Punta de Lobos</h1>
-        <p>Guía turística 🌊</p>
-    </div>
+<div class="panel">
+    <button class="btn" onclick="toggleLayer('main')">🌊 Punto</button>
+    <button class="btn" onclick="toggleLayer('hotel')">🏨 Hoteles</button>
+    <button class="btn" onclick="toggleLayer('food')">🍽️ Comida</button>
 </div>
 
-<div class="container">
+<div id="map"></div>
 
-<section>
-<h2>🌎 Sobre el lugar</h2>
-<div class="card">
-Punta de Lobos es uno de los destinos más impresionantes de Chile, famoso por sus olas, acantilados y naturaleza única.
-</div>
-</section>
-
-<section>
-<h2>🏄 Actividades</h2>
-
-<div class="card">
-<strong>Surf</strong>
-<p>Olas de nivel mundial para surfistas avanzados.</p>
-</div>
-
-<div class="card">
-<strong>Caminatas</strong>
-<p>Senderos con vistas al océano.</p>
-</div>
-
-<div class="card">
-<strong>Atardeceres</strong>
-<p>Uno de los mejores sunsets de Chile.</p>
-</div>
-
-</section>
-
-<section>
-<h2>🏨 Hoteles</h2>
-
-<div class="card">
-<strong>Hotel Alaia</strong>
-<div class="rating">★★★★★ <span>(4.7)</span></div>
-<a class="btn" href="https://www.google.com/maps/search/?api=1&query=Hotel+Alaia+Pichilemu" target="_blank">Ver en Maps</a>
-</div>
-
-</section>
-
-<section>
-<h2>🍽️ Restaurantes</h2>
-
-<div class="card">
-<strong>La Loba</strong>
-<div class="rating">★★★★☆ <span>(4.6)</span></div>
-<a class="btn" href="https://www.google.com/maps/search/?api=1&query=La+Loba+Pichilemu" target="_blank">Ver en Maps</a>
-</div>
-
-</section>
-
-<section id="mapa">
-<h2>📍 Ubicación (Costa Punta de Lobos)</h2>
-
-<iframe src="https://www.google.com/maps?q=-34.4155,-72.0210&z=16&output=embed"></iframe>
-
-<button class="btn" onclick="abrirGPS()">Llegar con GPS</button>
-</section>
-
-</div>
-
-<div class="navbar">
-<a href="#">Inicio</a>
-<a href="#mapa">Mapa</a>
-</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 
 <script>
-function abrirGPS() {
-    const destino = "-34.4155,-72.0210";
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(pos) {
-            const origen = pos.coords.latitude + "," + pos.coords.longitude;
+// Coordenadas principal
+const mainLat = -34.428138;
+const mainLon = -72.041360;
 
-            window.open(
-                `https://www.google.com/maps/dir/?api=1&origin=${origen}&destination=${destino}&travelmode=driving`,
-                '_blank'
-            );
-        }, function() {
-            window.open(
-                `https://www.google.com/maps/dir/?api=1&destination=${destino}`,
-                '_blank'
-            );
-        });
+// Crear mapa
+const map = L.map('map').setView([mainLat, mainLon], 14);
+
+// Capa base
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+// Capas
+const layers = {
+    main: L.layerGroup().addTo(map),
+    hotel: L.layerGroup().addTo(map),
+    food: L.layerGroup().addTo(map)
+};
+
+// ICONOS
+const iconMain = L.icon({ iconUrl:'https://cdn-icons-png.flaticon.com/512/684/684908.png', iconSize:[30,30]});
+const iconHotel = L.icon({ iconUrl:'https://cdn-icons-png.flaticon.com/512/139/139899.png', iconSize:[30,30]});
+const iconFood = L.icon({ iconUrl:'https://cdn-icons-png.flaticon.com/512/3075/3075977.png', iconSize:[30,30]});
+const iconUser = L.icon({ iconUrl:'https://cdn-icons-png.flaticon.com/512/149/149071.png', iconSize:[30,30]});
+
+// VARIABLES
+let userMarker = null;
+let routingControl = null;
+
+// 📍 UBICACIÓN EN TIEMPO REAL
+navigator.geolocation.watchPosition(pos => {
+    const lat = pos.coords.latitude;
+    const lon = pos.coords.longitude;
+
+    if (userMarker) {
+        userMarker.setLatLng([lat, lon]);
     } else {
-        window.open(
-            `https://www.google.com/maps/dir/?api=1&destination=${destino}`,
-            '_blank'
-        );
+        userMarker = L.marker([lat, lon], {icon: iconUser}).addTo(map)
+        .bindPopup("Tu ubicación 📍");
+    }
+});
+
+// 🧭 RUTA DIBUJADA
+function dibujarRuta(lat, lon) {
+
+    if (!userMarker) {
+        alert("Activa ubicación primero");
+        return;
+    }
+
+    if (routingControl) {
+        map.removeControl(routingControl);
+    }
+
+    routingControl = L.Routing.control({
+        waypoints: [
+            userMarker.getLatLng(),
+            L.latLng(lat, lon)
+        ],
+        routeWhileDragging: false
+    }).addTo(map);
+}
+
+// 📍 PIN PRINCIPAL
+L.marker([mainLat, mainLon], {icon: iconMain})
+.addTo(layers.main)
+.bindPopup(`
+<b>Punto principal 🌊</b><br>
+<div class="rating">★★★★★ (5.0)</div>
+<button onclick="dibujarRuta(${mainLat}, ${mainLon})">Cómo llegar</button>
+`);
+
+// 🏨 HOTEL
+L.marker([-34.4128, -72.0220], {icon: iconHotel})
+.addTo(layers.hotel)
+.bindPopup(`
+<b>Hotel Alaia 🏨</b><br>
+<div class="rating">★★★★★ (4.7)</div>
+<button onclick="dibujarRuta(-34.4128, -72.0220)">Cómo llegar</button>
+`);
+
+// 🍽️ RESTAURANTES
+L.marker([-34.3925, -72.0065], {icon: iconFood})
+.addTo(layers.food)
+.bindPopup(`
+<b>La Loba 🍽️</b><br>
+<div class="rating">★★★★☆ (4.6)</div>
+<button onclick="dibujarRuta(-34.3925, -72.0065)">Cómo llegar</button>
+`);
+
+L.marker([-34.3865, -72.0050], {icon: iconFood})
+.addTo(layers.food)
+.bindPopup(`
+<b>Cardumen Café ☕</b><br>
+<div class="rating">★★★★☆ (4.4)</div>
+<button onclick="dibujarRuta(-34.3865, -72.0050)">Cómo llegar</button>
+`);
+
+// 🎛️ FILTROS
+function toggleLayer(type) {
+    if (map.hasLayer(layers[type])) {
+        map.removeLayer(layers[type]);
+    } else {
+        map.addLayer(layers[type]);
     }
 }
+
 </script>
 
 </body>
