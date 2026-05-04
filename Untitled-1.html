@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Punta de Lobos | App PRO</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
+
+<style>
+body { margin:0; font-family:Poppins; background:#f1faee; }
+
+.hero{
+height:60vh;
+background:url('punta-lobos.jpg') center/cover no-repeat;
+display:flex;
+align-items:end;
+padding:20px;
+color:white;
+}
+
+.container{ padding:20px; }
+
+.card{
+background:white;
+padding:15px;
+border-radius:15px;
+margin-bottom:15px;
+box-shadow:0 8px 15px rgba(0,0,0,0.1);
+}
+
+/* GALERIA */
+.gallery{
+display:flex;
+gap:10px;
+overflow-x:auto;
+}
+
+.gallery img{
+width:260px;
+height:160px;
+object-fit:cover;
+border-radius:12px;
+cursor:pointer;
+}
+
+/* VIEWER */
+.viewer{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.viewer img{
+max-width:100%;
+max-height:100%;
+}
+
+.close{
+position:absolute;
+top:20px;
+right:20px;
+color:white;
+font-size:30px;
+cursor:pointer;
+}
+
+/* MAPA */
+#map{ height:60vh; }
+
+/* BUSCADOR */
+.search-box{ padding:10px; background:white; }
+
+input{
+width:100%;
+padding:10px;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
+.results{
+background:white;
+max-height:200px;
+overflow:auto;
+}
+
+.result{
+padding:10px;
+border-bottom:1px solid #eee;
+cursor:pointer;
+}
+
+.btn{
+padding:10px;
+background:#00c853;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+margin-top:5px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="hero">
+<h1>Punta de Lobos 🌊</h1>
+</div>
+
+<div class="container">
+
+<h2>📖 Historia de Punta de Lobos</h2>
+<div class="card">
+Punta de Lobos es uno de los destinos más emblemáticos de la costa chilena, reconocido internacionalmente por sus olas gigantes ideales para el surf. Su nombre proviene de las colonias de lobos marinos que habitan los roqueríos cercanos. Durante años fue un lugar conocido principalmente por pescadores locales, hasta que comenzó a atraer surfistas de todo el mundo.
+</div>
+
+<h2>🌎 Sobre Pichilemu</h2>
+<div class="card">
+Pichilemu es una ciudad costera ubicada en la Región de O'Higgins y es considerada la capital del surf en Chile. Su desarrollo como balneario comenzó a finales del siglo XIX, convirtiéndose en un destino turístico clave gracias a sus playas, su cultura relajada y su gastronomía basada en productos del mar.
+</div>
+
+<h2>🏄 Actividades</h2>
+<div class="card">Surf de nivel mundial 🌊</div>
+<div class="card">Caminatas por acantilados 🚶</div>
+<div class="card">Fotografía y atardeceres 📸</div>
+<div class="card">Gastronomía local 🍽️</div>
+
+<h2>📍 Información útil</h2>
+<div class="card">
+Mejor época: todo el año (invierno ideal para surf)<br>
+Clima: costero, con viento frecuente<br>
+Ubicación: a pocos minutos al sur de Pichilemu
+</div>
+
+<h2>📸 Galería</h2>
+<div class="gallery" id="gallery">
+<img src="paisaje1.jpg">
+<img src="paisaje2.jpg">
+<img src="surf.jpg">
+<img src="rocas.jpg">
+<img src="hotel.jpg">
+<img src="loba.jpg">
+<img src="cafe.jpg">
+</div>
+
+</div>
+
+<!-- VIEWER -->
+<div class="viewer" id="viewer">
+<span class="close" onclick="cerrar()">✖</span>
+<img id="imgView">
+</div>
+
+<h2 style="padding:10px">🗺️ Mapa interactivo</h2>
+
+<div class="search-box">
+<input id="search" placeholder="Buscar lugares en Pichilemu...">
+<div class="results" id="results"></div>
+</div>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+<script>
+
+// GALERIA
+const gallery = document.getElementById("gallery");
+const viewer = document.getElementById("viewer");
+const imgView = document.getElementById("imgView");
+
+let current = 0;
+const imgs = Array.from(gallery.querySelectorAll("img"));
+
+imgs.forEach((img,i)=>{
+img.onclick=()=>{
+current=i;
+viewer.style.display="flex";
+imgView.src=img.src;
+};
+});
+
+function cerrar(){
+viewer.style.display="none";
+}
+
+// SWIPE
+let startX=0;
+
+viewer.addEventListener("touchstart",e=>{
+startX=e.touches[0].clientX;
+});
+
+viewer.addEventListener("touchend",e=>{
+let endX=e.changedTouches[0].clientX;
+
+if(endX < startX-50) next();
+if(endX > startX+50) prev();
+});
+
+function next(){
+current=(current+1)%imgs.length;
+imgView.src=imgs[current].src;
+}
+
+function prev(){
+current=(current-1+imgs.length)%imgs.length;
+imgView.src=imgs[current].src;
+}
+
+// MAPA
+const map = L.map('map').setView([-34.428138, -72.041360], 13);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+let userMarker, route;
+
+navigator.geolocation.watchPosition(pos=>{
+const lat=pos.coords.latitude;
+const lon=pos.coords.longitude;
+
+if(userMarker){
+userMarker.setLatLng([lat,lon]);
+}else{
+userMarker=L.marker([lat,lon]).addTo(map);
+}
+});
+
+function irRuta(lat,lon){
+if(!userMarker){ alert("Activa ubicación"); return; }
+
+if(route){ map.removeControl(route); }
+
+route=L.Routing.control({
+waypoints:[userMarker.getLatLng(), L.latLng(lat,lon)]
+}).addTo(map);
+}
+
+function irMaps(lat,lon){
+window.open(`https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}`);
+}
+
+// BUSCADOR
+document.getElementById("search").addEventListener("input", async function(){
+
+const q=this.value;
+if(q.length<3) return;
+
+const res=await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${q}+Pichilemu`);
+const data=await res.json();
+
+const resultsDiv=document.getElementById("results");
+resultsDiv.innerHTML="";
+
+data.slice(0,5).forEach(place=>{
+const div=document.createElement("div");
+div.className="result";
+div.innerText=place.display_name;
+
+div.onclick=()=>{
+const lat=place.lat;
+const lon=place.lon;
+
+map.setView([lat,lon],16);
+
+L.marker([lat,lon]).addTo(map)
+.bindPopup(`
+<b>${place.display_name}</b><br>
+<button class="btn" onclick="irRuta(${lat},${lon})">Ruta</button><br>
+<button class="btn" onclick="irMaps(${lat},${lon})">Maps</button>
+`);
+
+resultsDiv.innerHTML="";
+};
+
+resultsDiv.appendChild(div);
+});
+
+});
+
+</script>
+
+</body>
+</html>
